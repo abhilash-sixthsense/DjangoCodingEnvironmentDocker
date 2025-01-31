@@ -14,9 +14,10 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     build-essential \
     curl \
-    vim \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    vim 
+RUN apt-get install  nginx -y
+# RUN apt-get clean \
+#     && rm -rf /var/lib/apt/lists/*
 
 # Create a Python virtual environment
 RUN python3 -m venv /opt/venv
@@ -24,7 +25,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # Upgrade pip
 RUN pip install --upgrade pip
-
+RUN pip install gunicorn
 WORKDIR /app
 
 CMD ["/bin/bash"]
